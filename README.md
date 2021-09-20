@@ -9,7 +9,7 @@ Install all necessary anchor dependencies: https://project-serum.github.io/ancho
 (ensure you use the same anchor version as this project, v0.15.0.  Anchor frequently introduces breaking changes are releases new major versions at an almost weekly cadence).
 
 ## Running Instructions
-```anchor build && anchor test``` in the track_node/ directory will compile and run the tests against a local solana validator.  Ensure you DO NOT have the solana-test-validator running as ```anchor test``` will spin up its own.
+```anchor build && anchor test``` in the outermost directory will compile and run the tests against a local solana validator.  Ensure you DO NOT have the solana-test-validator running as ```anchor test``` will spin up its own.
 
 To test the frontend, first run a test validator via ```solana-test-validator``` in another terminal tab/mux/screen.  Then run ```anchor build```, and the associated solana deploy command.  Finally, navigate to app/app and run ```yarn start```.
 
