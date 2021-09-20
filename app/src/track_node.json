@@ -1,0 +1,226 @@
+{
+  "version": "0.0.0",
+  "name": "track_node",
+  "instructions": [
+    {
+      "name": "initialize",
+      "accounts": [
+        {
+          "name": "trackNode",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "trackCount",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "user",
+          "isMut": false,
+          "isSigner": true
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "magnitude",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "addChildAsNode",
+      "accounts": [
+        {
+          "name": "trackNode",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "childTrackNode",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "user",
+          "isMut": false,
+          "isSigner": true
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "addChildAsTrack",
+      "accounts": [
+        {
+          "name": "trackNode",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "track",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "trackCount",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "owner",
+          "isMut": false,
+          "isSigner": true
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "ipfsMusicCid",
+          "type": "string"
+        },
+        {
+          "name": "owner",
+          "type": "publicKey"
+        }
+      ]
+    },
+    {
+      "name": "updateTrack",
+      "accounts": [
+        {
+          "name": "track",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "owner",
+          "isMut": false,
+          "isSigner": true
+        }
+      ],
+      "args": [
+        {
+          "name": "newIpfsMusicCid",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "setData",
+      "accounts": [
+        {
+          "name": "trackNode",
+          "isMut": true,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "data",
+          "type": "u64"
+        }
+      ]
+    }
+  ],
+  "accounts": [
+    {
+      "name": "TrackCount",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "trackCount",
+            "type": "u64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "TrackNode",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "data",
+            "type": "u64"
+          },
+          {
+            "name": "children",
+            "type": {
+              "vec": "publicKey"
+            }
+          },
+          {
+            "name": "magnitude",
+            "type": "u64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Track",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "ipfsMusicCid",
+            "type": "string"
+          },
+          {
+            "name": "trackId",
+            "type": "u64"
+          },
+          {
+            "name": "owner",
+            "type": "publicKey"
+          }
+        ]
+      }
+    }
+  ],
+  "errors": [
+    {
+      "code": 300,
+      "name": "Unauthorized",
+      "msg": "You are not authorized to perform this action."
+    },
+    {
+      "code": 301,
+      "name": "AlreadyFullNode",
+      "msg": "Node is full!"
+    },
+    {
+      "code": 302,
+      "name": "NotInnerNode",
+      "msg": "This node is meant to hold tracks as leaves, not be a middle node."
+    },
+    {
+      "code": 303,
+      "name": "NotExternalNode",
+      "msg": "This node is meant to be an inner node holding other nodes, not tracks."
+    },
+    {
+      "code": 304,
+      "name": "AlreadyInitialized",
+      "msg": "This node has already been initialized."
+    }
+  ],
+  "metadata": {
+    "address": "SWEETpoGXkYsidMpWTK6W2BeZ7FEfcYkg476zPFsLnS"
+  }
+}
